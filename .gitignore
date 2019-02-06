@@ -1,0 +1,17 @@
+bin/
+obj/
+.vs/
+.vscode/
+artefacts/
+nugetpackage/
+wwwroot/
+.idea
+[Rr]elease/
+
+*ncrunch*
+*.user
+
+tools/
+!tools/packages.config
+
+appsettings.Development.json
