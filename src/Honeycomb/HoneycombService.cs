@@ -18,7 +18,7 @@ namespace Honeycomb
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<HoneycombService> _logger;
         private readonly IOptions<HoneycombApiSettings> _settings;
-        private readonly ConcurrentQueue<HoneycombEvent> events;
+        private readonly ConcurrentQueue<HoneycombEvent> events = new ConcurrentQueue<HoneycombEvent>();
 
         public HoneycombService(IHttpClientFactory httpClientFactory,
             ILogger<HoneycombService> logger,
