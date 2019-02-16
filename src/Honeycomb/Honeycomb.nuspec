@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Honeycomb</id>
+    <version>0.0.2-pre</version>
+    <title>Honeycomb</title>
+    <authors>MartinJT</authors>
+    <owners>MartinJT</owners>
+    <projectUrl>https://github.com/martinjt/honeycomb</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Client package for Honeycomb.io</description>
+    <copyright>Copyright 2019</copyright>
+    <tags>Observability Tracing</tags>
+  </metadata>
+  <files>
+    <file src="bin\release\**\*.dll" target="lib/" />
+    <file src="bin\release\**\*.pdb" target="lib/" />
+  </files>
+</package>
