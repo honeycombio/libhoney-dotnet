@@ -37,5 +37,11 @@ namespace Honeycomb.AspNetCore.Hosting
         {
             await _honeycombService.Flush();
         }
+
+        public override async Task StopAsync(CancellationToken cancellationToken)
+        {
+            await _honeycombService.Flush();
+            await base.StopAsync(cancellationToken);
+        }
     }
 }
