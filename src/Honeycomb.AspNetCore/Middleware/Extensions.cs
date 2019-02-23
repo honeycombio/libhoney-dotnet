@@ -1,3 +1,4 @@
+using Honeycomb.AspNetCore.Hosting;
 using Honeycomb.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,7 @@ namespace Honeycomb.AspNetCore.Middleware
             serviceCollection.TryAddSingleton<HoneycombApiSettings>(settings);
             serviceCollection.TryAddSingleton<HoneycombService>();
             serviceCollection.TryAddSingleton<IHoneycombEventManager, HoneycombEventManager>();
+            serviceCollection.TryAddSingleton<HoneycombBackgroundService>();
             return serviceCollection;
         }
 
