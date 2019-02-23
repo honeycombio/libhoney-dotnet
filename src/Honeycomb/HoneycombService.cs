@@ -13,7 +13,7 @@ using Microsoft.Extensions.Options;
 
 namespace Honeycomb
 {
-    public class HoneycombService
+    public class HoneycombService : IHoneycombService
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly ILogger<HoneycombService> _logger;
