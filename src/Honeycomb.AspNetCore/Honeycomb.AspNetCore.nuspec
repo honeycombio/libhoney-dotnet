@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Honeycomb.AspNetCore</id>
-    <version>0.0.3-pre</version>
+    <version>0.0.4-pre</version>
     <title>Honeycomb.AspNetCore</title>
     <authors>MartinJT</authors>
     <owners>MartinJT</owners>
@@ -17,6 +17,6 @@
     <file src="bin\release\**\*.pdb" target="lib/" />
   </files>
   <dependencies>
-    <dependency id="Honeycomb" version="0.0.3-pre" />
+    <dependency id="Honeycomb" version="0.0.4-pre" />
   </dependencies>
 </package>
