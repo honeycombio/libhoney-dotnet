@@ -66,6 +66,7 @@ namespace Honeycomb
             message.RequestUri = new Uri($"https://api.honeycomb.io/1/events/{ev.DataSetName}");
             message.Headers.Add("X-Honeycomb-Event-Time",
                 ev.EventTime.ToUniversalTime().ToString(@"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}"));
+            message.Headers.Add("X-Honeycomb-Team", _settings.Value.TeamId);
 
             var resp = await client.SendAsync(message);
             if (!resp.IsSuccessStatusCode)
@@ -100,6 +101,7 @@ namespace Honeycomb
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
             message.RequestUri = new Uri($"https://api.honeycomb.io/1/batch/{dataSetName}");
+            message.Headers.Add("X-Honeycomb-Team", _settings.Value.TeamId);
 
             var resp = await client.SendAsync(message);
             if (!resp.IsSuccessStatusCode)
