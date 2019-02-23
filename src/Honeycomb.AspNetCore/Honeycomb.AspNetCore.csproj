@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <NuspecFile>Honeycomb.AspNetCore.nuspec</NuspecFile>
   </PropertyGroup>
 
   <ItemGroup>
