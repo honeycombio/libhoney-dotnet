@@ -17,7 +17,7 @@ namespace Honeycomb.AspNetCore.Middleware
             serviceCollection.TryAddSingleton<HoneycombApiSettings>(settings);
             serviceCollection.TryAddSingleton<IHoneycombService, HoneycombService>();
             serviceCollection.TryAddSingleton<IHoneycombEventManager, HoneycombEventManager>();
-            serviceCollection.TryAddSingleton<HoneycombBackgroundService>();
+            serviceCollection.AddHostedService<HoneycombBackgroundService>();
             return serviceCollection;
         }
 
