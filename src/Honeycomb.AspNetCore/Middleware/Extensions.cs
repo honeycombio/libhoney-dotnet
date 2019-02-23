@@ -8,13 +8,16 @@ namespace Honeycomb.AspNetCore.Middleware
 {
     public static class HoneycombMiddlewareExtensions
     {
-        public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection, HoneycombApiSettings settings)
+
+        public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection, HoneycombApiSettings honeycombApiSettings)
         {
+            serviceCollection.AddOptions();
             serviceCollection.AddHttpClient("honeycomb", client =>
             {
-                client.DefaultRequestHeaders.Add("X-Honeycomb-Team", settings.TeamId);
+                client.DefaultRequestHeaders.Add("X-Honeycomb-Team", honeycombApiSettings.TeamId);
             });
-            serviceCollection.TryAddSingleton<HoneycombApiSettings>(settings);
+            serviceCollection.Configure<HoneycombApiSettings>(o => o = honeycombApiSettings);
+
             serviceCollection.TryAddSingleton<IHoneycombService, HoneycombService>();
             serviceCollection.TryAddSingleton<IHoneycombEventManager, HoneycombEventManager>();
             serviceCollection.AddHostedService<HoneycombBackgroundService>();
