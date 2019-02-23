@@ -38,9 +38,17 @@ namespace Honeycomb
         {
             while (true)
             {
-                var chunk = events.DequeueChunk(_settings.Value.BatchSize);
+                var dequeueSize = events.Count < _settings.Value.BatchSize ?
+                    events.Count :
+                    _settings.Value.BatchSize;
+
+                var chunk = events
+                    .DequeueChunk(dequeueSize)
+                    .ToList();
+
                 if (!chunk.Any())
                     break;
+
                 await SendBatchAsync(chunk);
             }
         }
