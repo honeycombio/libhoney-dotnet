@@ -25,6 +25,7 @@ namespace Honeycomb.AspNetCore.Middleware
         public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddHttpClient("honeycomb");
+            serviceCollection.AddHttpContextAccessor();
             serviceCollection.TryAddSingleton<IHoneycombService, HoneycombService>();
             serviceCollection.TryAddSingleton<IHoneycombEventManager, HoneycombEventManager>();
             serviceCollection.AddHostedService<HoneycombBackgroundService>();
