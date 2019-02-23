@@ -36,7 +36,6 @@ namespace Honeycomb.AspNetCore.Middleware
             };
             context.Items.Add(HoneycombEventManager.ContextItemName, ev);
             ev.Data.Add("trace_id", context.TraceIdentifier);
-            ev.Data.Add("activity_id", Activity.Current.Id);
             ev.Data.Add("path", context.Request.Path.Value);
             ev.Data.Add("method", context.Request.Method);
             ev.Data.Add("protocol", context.Request.Protocol);
