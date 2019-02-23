@@ -13,14 +13,14 @@ using System.Linq;
 
 namespace Honeycomb.Tests
 {
-    public class SingleTests
+    public class QueueTests
     {
         private readonly HoneycombApiSettings _settings;
         private readonly Mock<IHttpClientFactory> _factory;
         private readonly MyMessageHandler _handler;
         private readonly HoneycombService _honeycombService;
 
-        public SingleTests()
+        public QueueTests()
         {
             _settings = new HoneycombApiSettings
             {
@@ -42,26 +42,58 @@ namespace Honeycomb.Tests
         }
 
         [Fact]
-        public async Task Simple()
+        public async Task Single()
         {
             _handler.ResponseMessages.Enqueue(new HttpResponseMessage
             {
                 Content = new StringContent("")
             });
 
-            await _honeycombService.SendSingleAsync(new HoneycombEvent
+            var events = new HoneycombEvent
             {
                 Data = new Dictionary<string, object> {
                     { "test", 2 }
                 },
                 EventTime = new DateTime(2010, 10, 10),
                 DataSetName = "blah"
-            });
+            };
+
+            _honeycombService.QueueEvent(events);
+
+            _handler.Messages.Count().ShouldBe(0);
+
+            await _honeycombService.Flush();
 
             _handler.Messages.Count().ShouldBe(1);
             var message = _handler.Messages[0];
-            message.RequestUri.AbsoluteUri.ShouldBe("https://api.honeycomb.io/1/events/blah");
+            message.RequestUri.AbsoluteUri.ShouldBe("https://api.honeycomb.io/1/batch/blah");
         }
+
+        [Fact]
+        public void Single_With_Flush()
+        {
+            _handler.ResponseMessages.Enqueue(new HttpResponseMessage
+            {
+                Content = new StringContent("")
+            });
+
+            var events = new HoneycombEvent
+            {
+                Data = new Dictionary<string, object> {
+                    { "test", 2 }
+                },
+                EventTime = new DateTime(2010, 10, 10),
+                DataSetName = "blah"
+            };
+
+            _honeycombService.QueueEvent(events);
+
+            _handler.Messages.Count().ShouldBe(0);
+
+            // var message = _handler.Messages[0];
+            // message.RequestUri.AbsoluteUri.ShouldBe("https://api.honeycomb.io/1/batch/blah");
+        }
+
         public class MyMessageHandler : HttpMessageHandler
         {
             public List<HttpRequestMessage> Messages { get; set; } = new List<HttpRequestMessage>();
@@ -74,4 +106,6 @@ namespace Honeycomb.Tests
             }
         }
     }
+
+
 }
