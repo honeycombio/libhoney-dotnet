@@ -5,17 +5,12 @@
 ### Services Registration
 ```csharp
 
-  public void ConfigureServices(IServiceCollection services)
-  {
-  ...
-      services.AddHoneycomb(new HoneycombApiSettings {
-                TeamId = "blah",
-                BatchSize = 20,
-                SendFrequency = 60000,
-                DefaultDataSet = "MyTestDataSet"
-            });
-  ...
-  }
+    public void ConfigureServices(IServiceCollection services)
+    {
+    ...
+        services.AddHoneycomb(Configuration);
+    ...
+    }
 ```
 
 ### Middleware
@@ -23,17 +18,16 @@
 Note the relative position to app.UseMvc()
 
 ```csharp
-  public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-  {
-      ...
-      app.UseHoneycomb();
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        ...
+        app.UseHoneycomb(Configuration);
 
-      app.UseMvc();
-
-  }
+        app.UseMvc();
+        ...
+    }
 
 ```
-
 
 ### Configuration
 
@@ -42,8 +36,8 @@ Configuration can either be done through adding this to your appSettings.json
 ```json
 {
   "HoneycombSettings": {
-    "TeamId": "",
-    "DefaultDataSet": "",
+    "TeamId": "blah",
+    "DefaultDataSet": "MyTestDataSet",
     "BatchSize": 100,
     "SendFrequency": 10000
   }
@@ -53,11 +47,40 @@ Configuration can either be done through adding this to your appSettings.json
 Or alternatively, you can create an instance of  `HoneycombApiSettings` and pass it directly to the Service registration:
 
 ```csharp
-services.AddHoneycomb(new HoneycombApiSettings {
-                TeamId = "blah",
-                BatchSize = 20,
-                SendFrequency = 60000,
-                DefaultDataSet = "MyTestDataSet"
-            });
+    services.AddHoneycomb(new HoneycombApiSettings {
+        TeamId = "blah",
+        DefaultDataSet = "MyTestDataSet"
+        BatchSize = 100,
+        SendFrequency = 10000,
+    });
 ```
 
+## Usage
+
+```csharp
+
+    public class HomeController : Controller
+    {
+        private readonly IHoneycombEventManager _eventManager;
+
+        public HomeController(IHoneycombEventManager eventManager)
+        {
+            _eventManager = eventManager;
+        }
+
+        ...
+
+        public IActionResult MyAction()
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+            ...
+            result = GetDataFromAPI();
+            ...
+            stopWatch.Stop();
+            _eventManager.AddData("api_response_ms", stopWatch.ElapsedMilliseconds);
+
+            return result;
+        }
+    }
+```
