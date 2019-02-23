@@ -35,7 +35,8 @@ namespace Honeycomb.AspNetCore.Middleware
                 DataSetName = _settings.Value.DefaultDataSet
             };
             context.Items.Add(HoneycombEventManager.ContextItemName, ev);
-
+            ev.Data.Add("trace_id", context.TraceIdentifier);
+            ev.Data.Add("activity_id", Activity.Current.Id);
             ev.Data.Add("path", context.Request.Path.Value);
             ev.Data.Add("method", context.Request.Method);
             ev.Data.Add("protocol", context.Request.Protocol);
@@ -47,6 +48,7 @@ namespace Honeycomb.AspNetCore.Middleware
             ev.Data.TryAdd("action", context.GetRouteValue("action"));
             ev.Data.TryAdd("controller", context.GetRouteValue("controller"));
             ev.Data.TryAdd("resp_size", context.Response.ContentLength);
+            ev.Data.TryAdd("resp_status", context.Response.StatusCode);
             ev.Data.TryAdd("req_ms", stopwatch.ElapsedMilliseconds);
 
             _service.QueueEvent(ev);
