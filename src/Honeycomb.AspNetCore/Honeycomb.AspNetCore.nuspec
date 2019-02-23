@@ -16,4 +16,7 @@
     <file src="bin\release\**\*.dll" target="lib/" />
     <file src="bin\release\**\*.pdb" target="lib/" />
   </files>
+  <dependencies>
+    <dependency id="Honeycomb" version="0.0.3-pre" />
+  </dependencies>
 </package>
