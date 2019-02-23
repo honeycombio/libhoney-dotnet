@@ -35,11 +35,13 @@ namespace Honeycomb.AspNetCore.Hosting
 
         private async Task ExecuteOnceAsync(CancellationToken cancellationToken)
         {
+            _logger.LogTrace($"Starting Flush");
             await _honeycombService.Flush();
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
         {
+            _logger.LogTrace($"Shutting down BackgroundService for Honeycomb");
             await _honeycombService.Flush();
             await base.StopAsync(cancellationToken);
         }

@@ -31,11 +31,13 @@ namespace Honeycomb
 
         public void QueueEvent(HoneycombEvent ev)
         {
+            _logger.LogTrace("Queued honeycomb event");
             events.Enqueue(ev);
         }
 
         public async Task Flush()
         {
+            _logger.LogTrace("Flushing honeycomb events");
             while (true)
             {
                 var dequeueSize = events.Count < _settings.Value.BatchSize ?
@@ -55,7 +57,7 @@ namespace Honeycomb
 
         public async Task SendSingleAsync(HoneycombEvent ev)
         {
-            _logger.LogInformation("Sending Honeycomb Data");
+            _logger.LogTrace("Sending Honeycomb Data");
 
             var client = _httpClientFactory.CreateClient("honeycomb");
 
@@ -75,7 +77,7 @@ namespace Honeycomb
 
         public async Task SendBatchAsync(IEnumerable<HoneycombEvent> items)
         {
-            _logger.LogInformation("Sending Honeycomb Data");
+            _logger.LogTrace("Sending Honeycomb Data");
 
             foreach (var group in items.GroupBy(i => i.DataSetName))
             {
@@ -85,7 +87,7 @@ namespace Honeycomb
 
         public async Task SendBatchAsync(IEnumerable<HoneycombEvent> items, string dataSetName)
         {
-            _logger.LogInformation("Sending Honeycomb Data for {dataSetName} with {items} items", dataSetName, items.Count());
+            _logger.LogTrace("Sending Honeycomb Data for {dataSetName} with {items} items", dataSetName, items.Count());
 
             var client = _httpClientFactory.CreateClient("honeycomb");
 
