@@ -12,10 +12,10 @@ namespace Honeycomb.AspNetCore.Middleware
     {
         private readonly RequestDelegate _next;
         private readonly ILogger<HoneycombMiddleware> _logger;
-        private readonly HoneycombService _service;
+        private readonly IHoneycombService _service;
         private readonly IOptions<HoneycombApiSettings> _settings;
         public HoneycombMiddleware(RequestDelegate next, 
-            HoneycombService service,
+            IHoneycombService service,
             IOptions<HoneycombApiSettings> settings,
             ILogger<HoneycombMiddleware> logger)
         {

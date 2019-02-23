@@ -15,7 +15,7 @@ namespace Honeycomb.AspNetCore.Middleware
                 client.DefaultRequestHeaders.Add("X-Honeycomb-Team", settings.TeamId);
             });
             serviceCollection.TryAddSingleton<HoneycombApiSettings>(settings);
-            serviceCollection.TryAddSingleton<HoneycombService>();
+            serviceCollection.TryAddSingleton<IHoneycombService, HoneycombService>();
             serviceCollection.TryAddSingleton<IHoneycombEventManager, HoneycombEventManager>();
             serviceCollection.TryAddSingleton<HoneycombBackgroundService>();
             return serviceCollection;
