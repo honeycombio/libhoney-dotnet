@@ -4,6 +4,8 @@
 
 ### Services Registration
 ```csharp
+    using Honeycomb.AspNetCore.Middleware;
+    ...
 
     public void ConfigureServices(IServiceCollection services)
     {
@@ -18,15 +20,17 @@
 Note the relative position to app.UseMvc()
 
 ```csharp
+    using Honeycomb.AspNetCore.Middleware;
+    ...
+
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
         ...
-        app.UseHoneycomb(Configuration);
+        app.UseHoneycomb();
 
         app.UseMvc();
         ...
     }
-
 ```
 
 ### Configuration
@@ -47,6 +51,9 @@ Configuration can either be done through adding this to your appSettings.json
 Or alternatively, you can create an instance of  `HoneycombApiSettings` and pass it directly to the Service registration:
 
 ```csharp
+    using Honeycomb.Models;
+    ...
+
     services.AddHoneycomb(new HoneycombApiSettings {
         TeamId = "blah",
         DefaultDataSet = "MyTestDataSet"
