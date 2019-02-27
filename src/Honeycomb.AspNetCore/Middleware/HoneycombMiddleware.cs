@@ -36,21 +36,22 @@ namespace Honeycomb.AspNetCore.Middleware
                 DataSetName = _settings.Value.DefaultDataSet
             };
             context.Items.Add(HoneycombEventManager.ContextItemName, ev);
-            ev.Data.Add("trace_id", context.TraceIdentifier);
-            ev.Data.Add("path", context.Request.Path.Value);
-            ev.Data.Add("method", context.Request.Method);
-            ev.Data.Add("protocol", context.Request.Protocol);
-            ev.Data.Add("req_size", context.Request.ContentLength);
-            ev.Data.Add("scheme", context.Request.Scheme);
-            ev.Data.Add("server_name", Environment.MachineName);
+            ev.Data.Add("trace.trace_id", context.TraceIdentifier);
+            ev.Data.Add("request.path", context.Request.Path.Value);
+            ev.Data.Add("request.method", context.Request.Method);
+            ev.Data.Add("request.http_version", context.Request.Protocol);
+            ev.Data.Add("request.content_length", context.Request.ContentLength);
+            ev.Data.Add("request.header.x_forwarded_proto", context.Request.Scheme);
+            ev.Data.Add("meta.local_hostname", Environment.MachineName);
 
             await _next.Invoke(context);
-            
+
+            ev.Data.TryAdd("name", $"{context.GetRouteValue("controller")}#{context.GetRouteValue("action")}");
             ev.Data.TryAdd("action", context.GetRouteValue("action"));
             ev.Data.TryAdd("controller", context.GetRouteValue("controller"));
-            ev.Data.TryAdd("resp_size", context.Response.ContentLength);
-            ev.Data.TryAdd("resp_status", context.Response.StatusCode);
-            ev.Data.TryAdd("req_ms", stopwatch.ElapsedMilliseconds);
+            ev.Data.TryAdd("response.content_length", context.Response.ContentLength);
+            ev.Data.TryAdd("response.status_code", context.Response.StatusCode);
+            ev.Data.TryAdd("duration_ms", stopwatch.ElapsedMilliseconds);
 
             _service.QueueEvent(ev);
         }
