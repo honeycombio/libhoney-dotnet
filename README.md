@@ -26,12 +26,11 @@ Note the relative position to app.UseMvc()
     public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     {
         ...
-        app.UseHoneycomb(Configuration);
+        app.UseHoneycomb();
 
         app.UseMvc();
         ...
     }
-
 ```
 
 ### Configuration
