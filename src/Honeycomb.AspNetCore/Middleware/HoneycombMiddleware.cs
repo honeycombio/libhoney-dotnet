@@ -44,16 +44,27 @@ namespace Honeycomb.AspNetCore.Middleware
             ev.Data.Add("request.header.x_forwarded_proto", context.Request.Scheme);
             ev.Data.Add("meta.local_hostname", Environment.MachineName);
 
-            await _next.Invoke(context);
-
-            ev.Data.TryAdd("name", $"{context.GetRouteValue("controller")}#{context.GetRouteValue("action")}");
-            ev.Data.TryAdd("action", context.GetRouteValue("action"));
-            ev.Data.TryAdd("controller", context.GetRouteValue("controller"));
-            ev.Data.TryAdd("response.content_length", context.Response.ContentLength);
-            ev.Data.TryAdd("response.status_code", context.Response.StatusCode);
-            ev.Data.TryAdd("duration_ms", stopwatch.ElapsedMilliseconds);
-
-            _service.QueueEvent(ev);
+            try
+            {
+                await _next.Invoke(context);
+            
+            	ev.Data.TryAdd("name", $"{context.GetRouteValue("controller")}#{context.GetRouteValue("action")}");
+                ev.Data.TryAdd("action", context.GetRouteValue("action"));
+                ev.Data.TryAdd("controller", context.GetRouteValue("controller"));
+            	ev.Data.TryAdd("response.content_length", context.Response.ContentLength);
+            	ev.Data.TryAdd("response.status_code", context.Response.StatusCode);
+            	ev.Data.TryAdd("duration_ms", stopwatch.ElapsedMilliseconds);
+            }
+            catch (Exception ex)
+            {
+                ev.Data.TryAdd("request.error", ex.Source);
+                ev.Data.TryAdd("request.error_detail", ex.Message);
+                throw;
+            }
+            finally
+            {
+                _service.QueueEvent(ev);
+            }
         }
 }
 }
