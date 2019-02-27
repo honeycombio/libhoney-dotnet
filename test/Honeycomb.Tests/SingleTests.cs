@@ -60,6 +60,7 @@ namespace Honeycomb.Tests
 
             _handler.Messages.Count().ShouldBe(1);
             var message = _handler.Messages[0];
+            message.Headers.UserAgent.First().Product.Name.ShouldBe("libhoney-dotnet");
             message.RequestUri.AbsoluteUri.ShouldBe("https://api.honeycomb.io/1/events/blah");
         }
         public class MyMessageHandler : HttpMessageHandler

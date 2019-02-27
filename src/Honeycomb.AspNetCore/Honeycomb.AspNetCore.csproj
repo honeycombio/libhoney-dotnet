@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <NuspecFile>Honeycomb.AspNetCore.nuspec</NuspecFile>
+    <AssemblyVersion>0.0.4</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Options;
+using System.Reflection;
+using System.Net.Http.Headers;
 
 namespace Honeycomb
 {
@@ -19,6 +21,7 @@ namespace Honeycomb
         private readonly ILogger<HoneycombService> _logger;
         private readonly IOptions<HoneycombApiSettings> _settings;
         private readonly ConcurrentQueue<HoneycombEvent> events = new ConcurrentQueue<HoneycombEvent>();
+        private readonly string _assemblyVersion;
 
         public HoneycombService(IHttpClientFactory httpClientFactory,
             ILogger<HoneycombService> logger,
@@ -27,6 +30,10 @@ namespace Honeycomb
             _httpClientFactory = httpClientFactory;
             _logger = logger;
             _settings = settings;
+            _assemblyVersion = typeof(HoneycombService)
+                    .Assembly
+                    .GetCustomAttribute<AssemblyFileVersionAttribute>()
+                    .Version;
         }
 
         public void QueueEvent(HoneycombEvent ev)
@@ -66,6 +73,9 @@ namespace Honeycomb
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
             message.RequestUri = new Uri($"https://api.honeycomb.io/1/events/{ev.DataSetName}");
+            message.Headers.UserAgent.Add(
+                    new ProductInfoHeaderValue(
+                        new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
             message.Headers.Add("X-Honeycomb-Event-Time",
                 ev.EventTime.ToUniversalTime().ToString(@"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}"));
             message.Headers.Add("X-Honeycomb-Team", _settings.Value.TeamId);
@@ -103,6 +113,9 @@ namespace Honeycomb
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
             message.RequestUri = new Uri($"https://api.honeycomb.io/1/batch/{dataSetName}");
+            message.Headers.UserAgent.Add(
+                    new ProductInfoHeaderValue(
+                        new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
             message.Headers.Add("X-Honeycomb-Team", _settings.Value.TeamId);
 
             var resp = await client.SendAsync(message);
