@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <NuspecFile>Honeycomb.nuspec</NuspecFile>
-    <AssemblyVersion>0.0.4</AssemblyVersion>
+    <AssemblyVersion>0.0.5</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
