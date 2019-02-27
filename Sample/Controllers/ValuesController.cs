@@ -4,17 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+using Honeycomb.AspNetCore;
+
 namespace Sample.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private IHoneycombEventManager EventManager { get; }
+
+        public ValuesController(IHoneycombEventManager eventManager)
+        {
+          EventManager = eventManager;
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var values = new string[] { "value1", "value2" };
+            EventManager.AddData("values_count", values.Length);
+            return values;
         }
 
         // GET api/values/5
