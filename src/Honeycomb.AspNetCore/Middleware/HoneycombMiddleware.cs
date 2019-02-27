@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Honeycomb.Models;
@@ -41,6 +42,7 @@ namespace Honeycomb.AspNetCore.Middleware
             ev.Data.Add("protocol", context.Request.Protocol);
             ev.Data.Add("req_size", context.Request.ContentLength);
             ev.Data.Add("scheme", context.Request.Scheme);
+            ev.Data.Add("server_name", Environment.MachineName);
 
             await _next.Invoke(context);
             
