@@ -12,6 +12,7 @@ using System.Linq;
 using Microsoft.Extensions.Options;
 using System.Reflection;
 using System.Net.Http.Headers;
+using System.Net;
 
 namespace Honeycomb
 {
@@ -72,7 +73,7 @@ namespace Honeycomb
             var content = JsonConvert.SerializeObject(ev.Data);
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
-            message.RequestUri = new Uri($"https://api.honeycomb.io/1/events/{ev.DataSetName}");
+            message.RequestUri = new Uri($"https://api.honeycomb.io/1/events/{WebUtility.UrlEncode(ev.DataSetName)}");
             message.Headers.UserAgent.Add(
                     new ProductInfoHeaderValue(
                         new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
@@ -112,7 +113,7 @@ namespace Honeycomb
             var content = JsonConvert.SerializeObject(sendItems);
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
-            message.RequestUri = new Uri($"https://api.honeycomb.io/1/batch/{dataSetName}");
+            message.RequestUri = new Uri($"https://api.honeycomb.io/1/batch/{WebUtility.UrlEncode(dataSetName)}");
             message.Headers.UserAgent.Add(
                     new ProductInfoHeaderValue(
                         new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
