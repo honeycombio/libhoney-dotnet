@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Honeycomb</id>
-    <version>0.0.5-pre</version>
+    <version>0.0.6-pre</version>
     <title>Honeycomb</title>
     <authors>MartinJT</authors>
     <owners>MartinJT</owners>
@@ -17,6 +17,6 @@
     <file src="bin\release\**\*.pdb" target="lib/" />
   </files>
   <dependencies>
-    <dependency id="Newtonsoft.Json" version="9.0.0" />
+    <dependency id="Newtonsoft.Json" version="9.0.1" />
   </dependencies>
 </package>
