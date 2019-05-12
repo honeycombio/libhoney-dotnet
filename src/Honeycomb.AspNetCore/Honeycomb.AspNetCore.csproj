@@ -3,14 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <NuspecFile>Honeycomb.AspNetCore.nuspec</NuspecFile>
-    <AssemblyVersion>0.0.6</AssemblyVersion>
+    <AssemblyVersion>0.0.7</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.2.0" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.1" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="2.1" />
   </ItemGroup>
 
   <ItemGroup>
