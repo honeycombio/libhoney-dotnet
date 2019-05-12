@@ -106,7 +106,7 @@ namespace Honeycomb
 
             var sendItems = items.Select(i => 
                 new { 
-                    time = i.EventTime.ToUniversalTime().ToString(@"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}"),
+                    time = i.EventTime.ToUniversalTime().ToString(@"yyyy-MM-ddTHH\:mm\:ss.fffK"),
                     data = i.Data
                     });
 
