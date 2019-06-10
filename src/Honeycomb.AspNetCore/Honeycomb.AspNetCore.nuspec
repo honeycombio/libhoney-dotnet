@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Honeycomb.AspNetCore</id>
-    <version>0.0.8-pre</version>
+    <version>1.0.0</version>
     <title>Honeycomb.AspNetCore</title>
     <authors>MartinJT</authors>
     <owners>MartinJT</owners>
