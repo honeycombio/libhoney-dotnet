@@ -12,7 +12,7 @@ ${TeamId}
 The Honeycomb AspNet core integration is setup in the package `Honeycomb.AspNetCore` On nuget.
 
 ```cmd
-dotnet package add Honeycomb.AspNetCore
+dotnet add package Honeycomb.AspNetCore
 ```
 
 You can also add the above package through visual studio.
