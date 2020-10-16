@@ -92,6 +92,6 @@ Or alternatively, you can create an instance of  `HoneycombApiSettings` and pass
     }
 ```
 
-# Donation
+## Donation
 
 This project was kindly donated to Honeycomb by [@martinjt](https://github.com/martinjt).
