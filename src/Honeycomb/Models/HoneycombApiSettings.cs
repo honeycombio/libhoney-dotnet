@@ -25,5 +25,10 @@ namespace Honeycomb.Models
         /// </summary>
         /// <value></value>
         public int SendFrequency { get; set; } = 60;
+
+        /// <summary>
+        /// The host name to send event data to
+        /// </summary>
+        public string ApiHost { get; set; } = "api.honeycomb.io";
     }
 }

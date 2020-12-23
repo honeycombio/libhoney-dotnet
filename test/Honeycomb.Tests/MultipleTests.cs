@@ -64,6 +64,29 @@ namespace Honeycomb.Tests
             message.RequestUri.AbsoluteUri.ShouldBe("https://api.honeycomb.io/1/batch/blah");
         }
 
+        [Fact]
+        public async Task AbleToPostToAlternateHost()
+        {
+            _settings.ApiHost = "myhost";
+            
+            _handler.ResponseMessages.Enqueue(new HttpResponseMessage
+            {
+                Content = new StringContent("")
+            });
+
+            await _honeycombService.SendBatchAsync(new[] { new HoneycombEvent
+            {
+                Data = new Dictionary<string, object> {
+                    { "test", 2 }
+                },
+                EventTime = new DateTime(2010, 10, 10),
+                DataSetName = "blah"
+            }});
+
+            _handler.Messages.Count().ShouldBe(1);
+            var message = _handler.Messages[0];
+            message.RequestUri.AbsoluteUri.ShouldBe("https://myhost/1/batch/blah");
+        }
         
 
         public class MyMessageHandler : HttpMessageHandler
