@@ -27,8 +27,8 @@ namespace Honeycomb.Models
         public int SendFrequency { get; set; } = 60;
 
         /// <summary>
-        /// The host name to send event data to
+        /// The base URL to send event data to
         /// </summary>
-        public string ApiHost { get; set; } = "api.honeycomb.io";
+        public string ApiHost { get; set; } = "https://api.honeycomb.io";
     }
 }

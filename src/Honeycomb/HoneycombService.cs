@@ -73,7 +73,7 @@ namespace Honeycomb
             var content = JsonConvert.SerializeObject(ev.Data);
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
-            message.RequestUri = new Uri($"https://{_settings.Value.ApiHost}/1/events/{WebUtility.UrlEncode(ev.DataSetName)}");
+            message.RequestUri = new Uri($"{_settings.Value.ApiHost}/1/events/{WebUtility.UrlEncode(ev.DataSetName)}");
             message.Headers.UserAgent.Add(
                     new ProductInfoHeaderValue(
                         new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
@@ -113,7 +113,7 @@ namespace Honeycomb
             var content = JsonConvert.SerializeObject(sendItems);
             message.Content = new StringContent(content, Encoding.UTF8, "application/json");
             message.Method = HttpMethod.Post;
-            message.RequestUri = new Uri($"https://{_settings.Value.ApiHost}/1/batch/{WebUtility.UrlEncode(dataSetName)}");
+            message.RequestUri = new Uri($"{_settings.Value.ApiHost}/1/batch/{WebUtility.UrlEncode(dataSetName)}");
             message.Headers.UserAgent.Add(
                     new ProductInfoHeaderValue(
                         new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));

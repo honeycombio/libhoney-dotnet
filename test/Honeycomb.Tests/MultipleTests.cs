@@ -67,7 +67,7 @@ namespace Honeycomb.Tests
         [Fact]
         public async Task AbleToPostToAlternateHost()
         {
-            _settings.ApiHost = "myhost";
+            _settings.ApiHost = "http://myhost";
             
             _handler.ResponseMessages.Enqueue(new HttpResponseMessage
             {
@@ -85,7 +85,7 @@ namespace Honeycomb.Tests
 
             _handler.Messages.Count().ShouldBe(1);
             var message = _handler.Messages[0];
-            message.RequestUri.AbsoluteUri.ShouldBe("https://myhost/1/batch/blah");
+            message.RequestUri.AbsoluteUri.ShouldBe("http://myhost/1/batch/blah");
         }
         
 
