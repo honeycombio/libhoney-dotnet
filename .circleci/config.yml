@@ -1,0 +1,28 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@2.2.0
+
+jobs:
+  test:
+    description: Setup and run tests
+    executor:
+      name: windows/default
+    working_directory: "~/project/test/Honeycomb.Tests/"
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run:
+          name: "Run tests"
+          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Print working directory"
+          command: pwd
+      - store_artifacts:
+          path: C:\Users\circleci\project\test_coverage
+workflows:
+  test:
+    jobs:
+      - test
