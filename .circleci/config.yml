@@ -10,7 +10,7 @@ jobs:
       name: windows/default
     working_directory: "~/project/test/Honeycomb.Tests/"
     steps:
-      - checkout
+      - checkout:
           path: "~/project"
       # - run:
       #     name: "Install project dependencies"
