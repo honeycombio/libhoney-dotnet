@@ -11,6 +11,7 @@ jobs:
     working_directory: "~/project/test/Honeycomb.Tests/"
     steps:
       - checkout
+          path: "~/project"
       # - run:
       #     name: "Install project dependencies"
       #     command: dotnet.exe restore
