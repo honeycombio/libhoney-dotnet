@@ -17,12 +17,7 @@ jobs:
           command: dotnet.exe restore
       - run:
           name: "Run tests"
-          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
-      - run:
-          name: "Print working directory"
-          command: pwd
-      - store_artifacts:
-          path: C:\Users\circleci\project\test_coverage
+          command: dotnet.exe test -v n
 workflows:
   test:
     jobs:
