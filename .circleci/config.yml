@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  windows: circleci/windows@2.2.0
+  windows: circleci/windows@2.4.0
 
 jobs:
   test:
@@ -12,20 +12,17 @@ jobs:
     steps:
       - checkout:
           path: "~/project"
-      # - run:
-      #     name: "Install project dependencies"
-      #     command: dotnet.exe restore
-      # - run:
-      #     name: "Run tests"
-      #     command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - run:
+          name: "Run tests"
+          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
       - run:
           name: "Print working directory"
           command: pwd
-      - run:
-          name: "wut"
-          command: dir          
-      # - store_artifacts:
-      #     path: C:\Users\circleci\project\test_coverage
+      - store_artifacts:
+          path: C:\Users\circleci\project\test_coverage
 workflows:
   test:
     jobs:
