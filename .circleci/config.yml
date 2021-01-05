@@ -13,11 +13,8 @@ jobs:
       - checkout:
           path: "~/project"
       - run:
-          name: "checksum test proj"
-          command: checksum "Honeycomb.Tests.csproj"
-      - run:
-          name: "checksum parent proj"
-          command: checksum "~/project/src/Honeycomb/Honeycomb.csproj"
+          name: "find all proj files"
+          command: Get-ChildItem -Path $HOME\project\*.csproj -Recurse
       # - run:
       #     name: "Install project dependencies"
       #     command: dotnet.exe restore
