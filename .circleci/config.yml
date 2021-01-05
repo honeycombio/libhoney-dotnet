@@ -13,21 +13,25 @@ jobs:
       - checkout:
           path: "~/project"
       - run:
-          name: "find all proj files"
+          name: "Generate cache seed"
           command: |
             Get-ChildItem -Path $HOME\project\*.csproj -Recurse `
             | Sort-Object Name `
             | ForEach-Object { Get-Content $_ } `
             | Out-File -FilePath .\cache-seed -Append
+      - restore_cache:
+          keys:
+            - dotnet-packages-v1-{{ checksum "cache-seed" }}
       - run:
-          name: "check seed"
-          command: Get-Content .\cache-seed
-      # - run:
-      #     name: "Install project dependencies"
-      #     command: dotnet.exe restore
-      # - run:
-      #     name: "Run tests"
-      #     command: dotnet.exe test -v n
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "cache-seed" }}
+      - run:
+          name: "Run tests"
+          command: dotnet.exe test -v n
 workflows:
   test:
     jobs:
