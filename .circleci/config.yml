@@ -14,7 +14,7 @@ jobs:
           path: "~/project"
       - run:
           name: "find all proj files"
-          command: Get-ChildItem -Path $HOME\project\*.csproj -Recurse
+          command: Get-ChildItem -Path $HOME\project\*.csproj -Recurse | Sort-Object Name | ForEach-Object { Get-Content $_ }
       # - run:
       #     name: "Install project dependencies"
       #     command: dotnet.exe restore
