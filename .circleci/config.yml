@@ -14,7 +14,14 @@ jobs:
           path: "~/project"
       - run:
           name: "find all proj files"
-          command: Get-ChildItem -Path $HOME\project\*.csproj -Recurse | Sort-Object Name | ForEach-Object { Get-Content $_ }
+          command: |
+            Get-ChildItem -Path $HOME\project\*.csproj -Recurse `
+            | Sort-Object Name `
+            | ForEach-Object { Get-Content $_ } `
+            | Out-File -FilePath .\cache-seed -Append
+      - run:
+          name: "check seed"
+          command: Get-Content .\cache-seed
       # - run:
       #     name: "Install project dependencies"
       #     command: dotnet.exe restore
