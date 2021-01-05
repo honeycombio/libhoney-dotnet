@@ -13,11 +13,17 @@ jobs:
       - checkout:
           path: "~/project"
       - run:
-          name: "Install project dependencies"
-          command: dotnet.exe restore
+        name: "checksum test proj"
+        command: checksum "Honeycomb.Tests.csproj"
       - run:
-          name: "Run tests"
-          command: dotnet.exe test -v n
+        name: "checksum parent proj"
+        command: checksum "~/project/src/Honeycomb/Honeycomb.csproj"
+      # - run:
+      #     name: "Install project dependencies"
+      #     command: dotnet.exe restore
+      # - run:
+      #     name: "Run tests"
+      #     command: dotnet.exe test -v n
 workflows:
   test:
     jobs:
