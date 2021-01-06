@@ -3,15 +3,10 @@ version: 2.1
 orbs:
   windows: circleci/windows@2.4.0
 
-jobs:
-  test:
-    description: Setup and run tests
-    executor:
-      name: windows/default
-    working_directory: "~/project/test/Honeycomb.Tests/"
+commands:
+  setup:
     steps:
-      - checkout:
-          path: "~/project"
+      - checkout
       - run:
           name: "Generate cache seed"
           command: |
@@ -29,10 +24,18 @@ jobs:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "cache-seed" }}
+
+jobs:
+  test:
+    executor:
+      name: windows/default
+    working_directory: "~/project/test/Honeycomb.Tests/"
+    steps:
+      - setup
       - run:
           name: "Run tests"
           command: dotnet.exe test -v n
 workflows:
-  test:
+  main:
     jobs:
       - test
