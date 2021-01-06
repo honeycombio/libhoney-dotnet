@@ -6,7 +6,8 @@ orbs:
 commands:
   setup:
     steps:
-      - checkout
+      - checkout:
+          path: "~/project"
       - run:
           name: "Generate cache seed"
           command: |
