@@ -50,10 +50,20 @@ jobs:
     working_directory: "~/project/src/Honeycomb/"
     steps:
       - build
+  build_core:
+    executor:
+      name: windows/default
+    working_directory: "~/project/src/Honeycomb.AspNetCore/"
+    steps:
+      - build
+
 workflows:
   main:
     jobs:
       - test
       - build_standard:
+          requires:
+            - test
+      - build_core:
           requires:
             - test
