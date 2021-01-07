@@ -36,7 +36,21 @@ jobs:
       - run:
           name: "Run tests"
           command: dotnet.exe test -v n
+  build:
+    executor:
+      name: windows/default
+    working_directory: "~/project/src/Honeycomb/"
+    steps:
+      - setup
+      - run:
+          name: "Build release package"
+          command: dotnet.exe pack --configuration release
+      - run:
+          command: dir bin\release
 workflows:
   main:
     jobs:
       - test
+      - build:
+          requires:
+            - test
