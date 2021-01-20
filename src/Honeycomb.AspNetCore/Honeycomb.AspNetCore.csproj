@@ -2,18 +2,25 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
-    <NuspecFile>Honeycomb.AspNetCore.nuspec</NuspecFile>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <PackageId>Honeycomb.AspNetCore</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Hoenycomb</Authors>
+    <Company>Honeycomb</Company>
+    <Description>Client package for Honeycomb.io</Description>
+    <Copyright>Copyright 2019</Copyright>
+    <PackageIcon>honeycomb.png</PackageIcon>
+    <PackageTags>Observability;Tracing;AspNetCore</PackageTags>
+    <PackageProjectUrl>https://github.com/honeycombio/libhoney-dotnet</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>
+    <None Include="../../honeycomb.png" Pack="true" PackagePath="\" />
+    <PackageReference Include="Honeycomb" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="2.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="../Honeycomb/Honeycomb.csproj" />
-  </ItemGroup>
 </Project>
