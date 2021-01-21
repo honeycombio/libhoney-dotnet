@@ -44,8 +44,10 @@ jobs:
           command: dotnet.exe pack --configuration release
       - store_artifacts:
           path: src\Honeycomb\bin\Release
+          destination: Honeycomb-package
       - store_artifacts:
           path: src\Honeycomb.AspNetCore\bin\Release
+          destination: Honeycomb.AspNetCore-package
 
 workflows:
   main:
