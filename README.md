@@ -1,4 +1,28 @@
-# Honeycomb dotnet implementation
+# libhoney-dotnet [![CircleCI](https://circleci.com/gh/honeycombio/libhoney-dotnet.svg?style=shield)](https://circleci.com/gh/honeycombio/libhoney-dotnet)
+
+This package makes it easy to instrument your .NET app to send useful events to Honeycomb, a service for debugging your software in production.
+
+- [Sample](/Sample/)
+
+## Requirements
+
+The library targets [.NET Standard 2.0](https://dotnet.microsoft.com/platform/dotnet-standard).
+
+To build and test the project locally, you'll need .NET SDK 5.0+.
+
+## Building & Testing
+
+To build all the projects, run the following:
+
+`dotnet build`
+
+To run tests, run:
+
+`dotnet test`
+
+To create the nuget packages, run:
+
+`dotnet pack`
 
 ## ASP.NET Core
 
