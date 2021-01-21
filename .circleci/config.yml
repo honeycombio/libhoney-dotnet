@@ -43,7 +43,9 @@ jobs:
           name: "Build release package"
           command: dotnet.exe pack --configuration release
       - store_artifacts:
-          path: bin\release
+          path: src\Honeycomb\bin\Release
+      - store_artifacts:
+          path: src\Honeycomb.AspNetCore\bin\Release
 
 workflows:
   main:
