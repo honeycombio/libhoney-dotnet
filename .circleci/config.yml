@@ -6,12 +6,11 @@ orbs:
 commands:
   setup:
     steps:
-      - checkout:
-          path: "~/project"
+      - checkout
       - run:
           name: "Generate cache seed"
           command: |
-            Get-ChildItem -Path $HOME\project\*.csproj -Recurse `
+            Get-ChildItem -Path $HOME\*.csproj -Recurse `
             | Sort-Object Name `
             | ForEach-Object { Get-Content $_ } `
             | Out-File -FilePath .\cache-seed -Append
@@ -25,7 +24,19 @@ commands:
           paths:
             - C:\Users\circleci\.nuget\packages
           key: dotnet-packages-v1-{{ checksum "cache-seed" }}
+
+jobs:
+  test:
+    executor:
+      name: windows/default
+    steps:
+      - setup
+      - run:
+          name: "Run tests"
+          command: dotnet.exe test -v n
   build:
+    executor:
+      name: windows/default
     steps:
       - setup
       - run:
@@ -34,36 +45,10 @@ commands:
       - store_artifacts:
           path: bin\release
 
-jobs:
-  test:
-    executor:
-      name: windows/default
-    working_directory: "~/project/test/Honeycomb.Tests/"
-    steps:
-      - setup
-      - run:
-          name: "Run tests"
-          command: dotnet.exe test -v n
-  build_standard:
-    executor:
-      name: windows/default
-    working_directory: "~/project/src/Honeycomb/"
-    steps:
-      - build
-  build_core:
-    executor:
-      name: windows/default
-    working_directory: "~/project/src/Honeycomb.AspNetCore/"
-    steps:
-      - build
-
 workflows:
   main:
     jobs:
       - test
-      - build_standard:
-          requires:
-            - test
-      - build_core:
+      - build:
           requires:
             - test
