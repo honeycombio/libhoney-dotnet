@@ -34,25 +34,69 @@ jobs:
       - run:
           name: "Run tests"
           command: dotnet.exe test -v n
-  build:
+  package:
     executor:
       name: windows/default
     steps:
       - setup
+      - run: mkdir -p ~/artifacts
       - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release
+          command: dotnet.exe pack --configuration release --output ~/artifacts -p:version=${CIRCLE_TAG}
       - store_artifacts:
-          path: src\Honeycomb\bin\Release
-          destination: Honeycomb-package
-      - store_artifacts:
-          path: src\Honeycomb.AspNetCore\bin\Release
-          destination: Honeycomb.AspNetCore-package
+          path: ~/artifacts
+  publish_github:
+    docker:
+      - image: cibuilds/github:0.13.0
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: "Publish Release on GitHub"
+          command: |
+            echo "about to publish to tag ${CIRCLE_TAG}"
+            ls -l ~/artifacts/*
+            ghr -draft -n ${CIRCLE_TAG} -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ~/artifacts
+  publish_nuget:
+    executor:
+      name: windows/default
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run:
+          name: "Publishing to nuget.org"
+          command: dotnet.exe nuget push --api-key="${NUGET_APIKEY}" ~/artifacts/*.nupkg
 
 workflows:
-  main:
+  version: 2
+  nightly:
+    triggers:
+      - schedule:
+          cron: "0 0 * * *"
+          filters:
+            branches:
+              only:
+                - main
     jobs:
       - test
-      - build:
+  build:
+    jobs:
+      - test
+      - package:
           requires:
             - test
+          filters: &tag_filters
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+      - publish_github:
+          context: Honeycomb Secrets for Public Repos
+          requires:
+            - package
+          filters: *tag_filters
+      - publish_nuget:
+          context: Honeycomb Secrets for Public Repos
+          requires:
+            - package
+          filters: *tag_filters
