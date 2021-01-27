@@ -1,0 +1,58 @@
+version: 2.1
+
+orbs:
+  windows: circleci/windows@2.4.0
+
+commands:
+  setup:
+    steps:
+      - checkout
+      - run:
+          name: "Generate cache seed"
+          command: |
+            Get-ChildItem -Path $HOME\*.csproj -Recurse `
+            | Sort-Object Name `
+            | ForEach-Object { Get-Content $_ } `
+            | Out-File -FilePath .\cache-seed -Append
+      - restore_cache:
+          keys:
+            - dotnet-packages-v1-{{ checksum "cache-seed" }}
+      - run:
+          name: "Install project dependencies"
+          command: dotnet.exe restore
+      - save_cache:
+          paths:
+            - C:\Users\circleci\.nuget\packages
+          key: dotnet-packages-v1-{{ checksum "cache-seed" }}
+
+jobs:
+  test:
+    executor:
+      name: windows/default
+    steps:
+      - setup
+      - run:
+          name: "Run tests"
+          command: dotnet.exe test -v n
+  build:
+    executor:
+      name: windows/default
+    steps:
+      - setup
+      - run:
+          name: "Build release package"
+          command: dotnet.exe pack --configuration release
+      - store_artifacts:
+          path: src\Honeycomb\bin\Release
+          destination: Honeycomb-package
+      - store_artifacts:
+          path: src\Honeycomb.AspNetCore\bin\Release
+          destination: Honeycomb.AspNetCore-package
+
+workflows:
+  main:
+    jobs:
+      - test
+      - build:
+          requires:
+            - test
