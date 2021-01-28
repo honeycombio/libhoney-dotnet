@@ -81,7 +81,10 @@ workflows:
       - test
   build:
     jobs:
-      - test
+      - test:
+          filters:
+            tags:
+              only: /.*/
       - package:
           requires:
             - test
