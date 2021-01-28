@@ -39,12 +39,12 @@ jobs:
       name: windows/default
     steps:
       - setup
-      - run: mkdir -p ~/artifacts
+      - run: mkdir -p ~\artifacts
       - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release --output ~/artifacts
+          command: dotnet.exe pack --configuration release --output ~\artifacts
       - store_artifacts:
-          path: ~/artifacts
+          path: ~\artifacts
   publish_github:
     docker:
       - image: cibuilds/github:0.13.0
