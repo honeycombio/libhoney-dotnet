@@ -42,7 +42,7 @@ jobs:
       - run: mkdir -p ~/artifacts
       - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release --output ~/artifacts -p:version=${CIRCLE_TAG}
+          command: dotnet.exe pack --configuration release --output ~/artifacts
       - store_artifacts:
           path: ~/artifacts
   publish_github:
