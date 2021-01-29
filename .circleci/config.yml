@@ -39,37 +39,34 @@ jobs:
       name: windows/default
     steps:
       - setup
-      - run: mkdir -p artifacts
+      - run: mkdir -p build
       - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release --output artifacts
+          command: dotnet.exe pack --configuration release --output build
       - persist_to_workspace:
-          root: ~/
+          root: \
           paths:
-            - artifacts
+            - build\*.nupkg
       - store_artifacts:
-          path: artifacts
+          path: build
   publish_github:
     docker:
       - image: cibuilds/github:0.13.0
     steps:
       - attach_workspace:
-          at: ~/
+          at: ./
       - run:
-          name: "Publish Release on GitHub"
-          command: |
-            echo "about to publish to tag ${CIRCLE_TAG}"
-            ls -l ~/artifacts/*
-            ghr -draft -n ${CIRCLE_TAG} -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} ~/artifacts
+          name: "Publishing Release on GitHub"
+          command: ghr -draft -n ${CIRCLE_TAG} -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} ${CIRCLE_TAG} build/
   publish_nuget:
     executor:
       name: windows/default
     steps:
       - attach_workspace:
-          at: ~/
+          at: .\
       - run:
           name: "Publishing to nuget.org"
-          command: dotnet.exe nuget push --api-key="${NUGET_APIKEY}" ~\artifacts/*.nupkg
+          command: dotnet.exe nuget push build\*.nupkg -k ${NUGET_APIKEY} -s https://api.nuget.org/v3/index.json
 
 workflows:
   version: 2
@@ -92,22 +89,23 @@ workflows:
       - package:
           requires:
             - test
-          filters: &always_filter
+          filters: *always_filter
+      - publish_github:
+          context: Honeycomb Secrets for Public Repos
+          requires:
+            - package
+          filters:
             tags:
               only: /^v.*/
             branches:
               ignore: /.*/
-      - publish_github:
-          requires:
-            - package
-          context: Honeycomb Secrets for Public Repos
-          requires:
-            - package
-          filters: *tag_filters
       - publish_nuget:
           requires:
             - package
           context: Honeycomb Secrets for Public Repos
-          requires:
-            - package
-          filters: *tag_filters
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+
