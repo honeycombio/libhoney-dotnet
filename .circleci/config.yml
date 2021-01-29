@@ -66,7 +66,7 @@ jobs:
           at: .\
       - run:
           name: "Publishing to nuget.org"
-          command: dotnet.exe nuget push "build\*.nupkg" -k $env:NUGET_APIKEY
+          command: dotnet.exe nuget push "build\*.nupkg" -k $env:NUGET_APIKEY -s https://api.nuget.org/v3/index.json
 
 workflows:
   version: 2
