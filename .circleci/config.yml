@@ -66,7 +66,9 @@ jobs:
           at: .\
       - run:
           name: "Publishing to nuget.org"
-          command: dotnet.exe nuget push build\*.nupkg -k ${NUGET_APIKEY} -s https://api.nuget.org/v3/index.json
+          command: |
+            dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org
+            dotnet.exe nuget push "build\*.nupkg" -k ${NUGET_APIKEY}
 
 workflows:
   version: 2
