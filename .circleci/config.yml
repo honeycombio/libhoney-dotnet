@@ -100,6 +100,7 @@ workflows:
             branches:
               ignore: /.*/
       - publish_nuget:
+          context: Honeycomb Secrets for Public Repos
           requires:
             - package
           filters:
