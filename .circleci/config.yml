@@ -39,12 +39,16 @@ jobs:
       name: windows/default
     steps:
       - setup
-      - run: mkdir -p ~\artifacts
+      - run: mkdir -p artifacts
       - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release --output ~\artifacts
+          command: dotnet.exe pack --configuration release --output artifacts
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - artifacts
       - store_artifacts:
-          path: ~\artifacts
+          path: artifacts
   publish_github:
     docker:
       - image: cibuilds/github:0.13.0
@@ -65,7 +69,7 @@ jobs:
           at: ~/
       - run:
           name: "Publishing to nuget.org"
-          command: dotnet.exe nuget push --api-key="${NUGET_APIKEY}" ~/artifacts/*.nupkg
+          command: dotnet.exe nuget push --api-key="${NUGET_APIKEY}" ~\artifacts/*.nupkg
 
 workflows:
   version: 2
@@ -82,23 +86,27 @@ workflows:
   build:
     jobs:
       - test:
-          filters:
+          filters: &always_filter
             tags:
               only: /.*/
       - package:
           requires:
             - test
-          filters: &tag_filters
+          filters: &always_filter
             tags:
               only: /^v.*/
             branches:
               ignore: /.*/
       - publish_github:
+          requires:
+            - package
           context: Honeycomb Secrets for Public Repos
           requires:
             - package
           filters: *tag_filters
       - publish_nuget:
+          requires:
+            - package
           context: Honeycomb Secrets for Public Repos
           requires:
             - package
