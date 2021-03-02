@@ -47,7 +47,7 @@ namespace Honeycomb.AspNetCore.Middleware
             try
             {
                 await _next.Invoke(context);
-            
+                stopwatch.Stop();
             	ev.Data.TryAdd("name", $"{context.GetRouteValue("controller")}#{context.GetRouteValue("action")}");
                 ev.Data.TryAdd("action", context.GetRouteValue("action"));
                 ev.Data.TryAdd("controller", context.GetRouteValue("controller"));
