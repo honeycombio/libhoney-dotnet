@@ -79,7 +79,7 @@ namespace Honeycomb
                         new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
             message.Headers.Add("X-Honeycomb-Event-Time",
                 ev.EventTime.ToUniversalTime().ToString(@"{0:yyyy-MM-ddTHH\:mm\:ss.fffK}"));
-            message.Headers.Add("X-Honeycomb-Team", _settings.Value.TeamId);
+            message.Headers.Add("X-Honeycomb-Team", _settings.Value.WriteKey);
 
             var resp = await client.SendAsync(message);
             if (!resp.IsSuccessStatusCode)
@@ -104,8 +104,8 @@ namespace Honeycomb
 
             var message = new HttpRequestMessage();
 
-            var sendItems = items.Select(i => 
-                new { 
+            var sendItems = items.Select(i =>
+                new {
                     time = i.EventTime.ToUniversalTime().ToString(@"yyyy-MM-ddTHH\:mm\:ss.fffK"),
                     data = i.Data
                     });
@@ -117,7 +117,7 @@ namespace Honeycomb
             message.Headers.UserAgent.Add(
                     new ProductInfoHeaderValue(
                         new ProductHeaderValue("libhoney-dotnet", _assemblyVersion)));
-            message.Headers.Add("X-Honeycomb-Team", _settings.Value.TeamId);
+            message.Headers.Add("X-Honeycomb-Team", _settings.Value.WriteKey);
 
             var resp = await client.SendAsync(message);
             if (!resp.IsSuccessStatusCode)

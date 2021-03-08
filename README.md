@@ -64,8 +64,8 @@ Configuration can either be done through adding this to your appSettings.json
 ```json
 {
   "HoneycombSettings": {
-    "TeamId": "blah",
-    "DefaultDataSet": "MyTestDataSet",
+    "WriteKey": "<your-writekey>",
+    "DefaultDataSet": "<your-dataset>",
     "BatchSize": 100,
     "SendFrequency": 10000
   }
@@ -79,8 +79,8 @@ Or alternatively, you can create an instance of  `HoneycombApiSettings` and pass
     ...
 
     services.AddHoneycomb(new HoneycombApiSettings {
-        TeamId = "blah",
-        DefaultDataSet = "MyTestDataSet"
+        WriteKey = "<your-writekey>",
+        DefaultDataSet = "<your-dataset>"
         BatchSize = 100,
         SendFrequency = 10000,
     });
