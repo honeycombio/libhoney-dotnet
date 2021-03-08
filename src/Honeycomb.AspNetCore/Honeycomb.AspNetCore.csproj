@@ -21,8 +21,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Honeycomb\Honeycomb.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="../../honeycomb.png" Pack="true" PackagePath="\" />
-    <PackageReference Include="Honeycomb" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1" />
     <PackageReference Include="Microsoft.AspNetCore.Routing" Version="2.1" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1" />
