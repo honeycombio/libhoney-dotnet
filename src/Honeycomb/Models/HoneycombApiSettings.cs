@@ -21,7 +21,7 @@ namespace Honeycomb.Models
         public int BatchSize { get; set; } = 100;
 
         /// <summary>
-        /// The time between sending event batches. Expressed in millisseconds.
+        /// The time between sending event batches. Expressed in milliseconds.
         /// </summary>
         /// <value></value>
         public int SendFrequency { get; set; } = 10000;
