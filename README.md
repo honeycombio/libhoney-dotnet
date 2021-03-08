@@ -64,25 +64,26 @@ Configuration can either be done through adding this to your appSettings.json
 ```json
 {
   "HoneycombSettings": {
-    "TeamId": "blah",
-    "DefaultDataSet": "MyTestDataSet",
+    "TeamId": "<your-writekey>",
+    "DefaultDataSet": "<your-dataset>",
     "BatchSize": 100,
     "SendFrequency": 10000
   }
 }
 ```
 
-Or alternatively, you can create an instance of  `HoneycombApiSettings` and pass it directly to the Service registration:
+Or alternatively, you can configure an instance of `HoneycombApiSettings` programmatically:
 
 ```csharp
     using Honeycomb.Models;
     ...
 
-    services.AddHoneycomb(new HoneycombApiSettings {
-        TeamId = "blah",
-        DefaultDataSet = "MyTestDataSet"
-        BatchSize = 100,
-        SendFrequency = 10000,
+    services.AddHoneycomb(options => {
+        options.ApiHost = "https://api.honeycomb.io";
+        options.TeamId = "<your-writekey>";
+        options.DefaultDataSet = "<your-dataset>";
+        options.BatchSize = 100;
+        options.SendFrequency = 10000;
     });
 ```
 
