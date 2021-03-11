@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Honeycomb.AspNetCore" Version="1.0.0" />
+    <ProjectReference Include="..\src\Honeycomb.AspNetCore\Honeycomb.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>

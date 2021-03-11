@@ -1,10 +1,10 @@
 ## Integrating with AspNet Core
 
 ### Before you get started
-You'll need your Honeycomb TeamId, this is your API Key please find it below
+You'll need your Honeycomb WriteKey, this is your API Key please find it below
 
 ```
-${TeamId}
+${WriteKey}
 ```
 
 ### Add the package
@@ -22,7 +22,7 @@ Then, in your projects `appsettings.json` add the following settings:
 ```json
 {
   "HoneycombSettings": {
-    "TeamId": "blah",
+    "WriteKey": "blah",
     "DefaultDataSet": "MyTestDataSet",
     "BatchSize": 100,
     "SendFrequency": 10000
