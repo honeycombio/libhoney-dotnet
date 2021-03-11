@@ -64,7 +64,7 @@ Configuration can either be done through adding this to your appSettings.json
 ```json
 {
   "HoneycombSettings": {
-    "TeamId": "<your-writekey>",
+    "WriteKey": "<your-writekey>",
     "DefaultDataSet": "<your-dataset>",
     "BatchSize": 100,
     "SendFrequency": 10000
@@ -80,7 +80,7 @@ Or alternatively, you can configure an instance of `HoneycombApiSettings` progra
 
     services.AddHoneycomb(options => {
         options.ApiHost = "https://api.honeycomb.io";
-        options.TeamId = "<your-writekey>";
+        options.WriteKey = "<your-writekey>";
         options.DefaultDataSet = "<your-dataset>";
         options.BatchSize = 100;
         options.SendFrequency = 10000;

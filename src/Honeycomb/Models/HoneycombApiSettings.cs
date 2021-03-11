@@ -1,3 +1,5 @@
+using System;
+
 namespace Honeycomb.Models
 {
     public class HoneycombApiSettings
@@ -6,7 +8,18 @@ namespace Honeycomb.Models
         /// The TeamId within Honeycomb.
         /// </summary>
         /// <value></value>
-        public string TeamId { get; set; }
+        [ObsoleteAttribute("This property is obsolete. Use WriteKey instead.", false)]
+        public string TeamId
+        {
+            get { return WriteKey; }
+            set { WriteKey = value; }
+        }
+
+        /// <summary>
+        /// The WriteKey within Honeycomb.
+        /// </summary>
+        /// <value></value>
+        public string WriteKey { get; set; }
 
         /// <summary>
         /// The default dataset to apply to each event.
