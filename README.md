@@ -72,12 +72,27 @@ Configuration can either be done through adding this to your appSettings.json
 }
 ```
 
+Then configure Libhoney using an instance of `IConfiguration` during `ConfigureServices`:
+
+```csharp
+using Honeycomb.AspNetCore.Middleware;
+...
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddHoneycomb(Configuration);
+}
+```
+
 Or alternatively, you can configure an instance of `HoneycombApiSettings` programmatically:
 
 ```csharp
-    using Honeycomb.Models;
-    ...
+using Honeycomb.Models;
+using Honeycomb.AspNetCore.Middleware;
+...
 
+public void ConfigureServices(IServiceCollection services)
+{
     services.AddHoneycomb(options => {
         options.ApiHost = "https://api.honeycomb.io";
         options.WriteKey = "<your-writekey>";
@@ -85,6 +100,7 @@ Or alternatively, you can configure an instance of `HoneycombApiSettings` progra
         options.BatchSize = 100;
         options.SendFrequency = 10000;
     });
+}
 ```
 
 ## Usage
