@@ -10,7 +10,6 @@ namespace Honeycomb.AspNetCore.Middleware
 {
     public static class HoneycombMiddlewareExtensions
     {
-
         public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.Configure<HoneycombApiSettings>(o => configuration.GetSection("HoneycombSettings").Bind(o));
