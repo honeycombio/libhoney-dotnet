@@ -1,3 +1,4 @@
+using System;
 using Honeycomb.AspNetCore.Hosting;
 using Honeycomb.Models;
 using Microsoft.AspNetCore.Builder;
@@ -9,16 +10,15 @@ namespace Honeycomb.AspNetCore.Middleware
 {
     public static class HoneycombMiddlewareExtensions
     {
-
         public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection, IConfiguration configuration)
         {
             serviceCollection.Configure<HoneycombApiSettings>(o => configuration.GetSection("HoneycombSettings").Bind(o));
             return AddHoneycomb(serviceCollection);
         }
 
-        public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection, HoneycombApiSettings honeycombApiSettings)
+        public static IServiceCollection AddHoneycomb(this IServiceCollection serviceCollection, Action<HoneycombApiSettings> configureHoneycombApiSettings)
         {
-            serviceCollection.Configure<HoneycombApiSettings>(o => o = honeycombApiSettings);
+            serviceCollection.Configure(configureHoneycombApiSettings);
             return AddHoneycomb(serviceCollection);
         }
 

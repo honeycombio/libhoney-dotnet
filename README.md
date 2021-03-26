@@ -72,18 +72,35 @@ Configuration can either be done through adding this to your appSettings.json
 }
 ```
 
-Or alternatively, you can create an instance of  `HoneycombApiSettings` and pass it directly to the Service registration:
+Then configure Libhoney using an instance of `IConfiguration` during `ConfigureServices`:
 
 ```csharp
-    using Honeycomb.Models;
-    ...
+using Honeycomb.AspNetCore.Middleware;
+...
 
-    services.AddHoneycomb(new HoneycombApiSettings {
-        WriteKey = "<your-writekey>",
-        DefaultDataSet = "<your-dataset>"
-        BatchSize = 100,
-        SendFrequency = 10000,
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddHoneycomb(Configuration);
+}
+```
+
+Or alternatively, you can configure an instance of `HoneycombApiSettings` programmatically:
+
+```csharp
+using Honeycomb.Models;
+using Honeycomb.AspNetCore.Middleware;
+...
+
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddHoneycomb(options => {
+        options.ApiHost = "https://api.honeycomb.io";
+        options.WriteKey = "<your-writekey>";
+        options.DefaultDataSet = "<your-dataset>";
+        options.BatchSize = 100;
+        options.SendFrequency = 10000;
     });
+}
 ```
 
 ## Usage
