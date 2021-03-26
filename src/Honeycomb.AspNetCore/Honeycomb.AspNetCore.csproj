@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageId>Honeycomb.AspNetCore</PackageId>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
     <VeresionSuffix>local</VeresionSuffix>
     <Authors>Hoenycomb</Authors>
     <Company>Honeycomb</Company>

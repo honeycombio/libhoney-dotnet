@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Honeycomb</PackageId>
-    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionPrefix>1.1.1</VersionPrefix>
     <VersionSuffix>local</VersionSuffix>
     <Authors>Hoenycomb</Authors>
     <Company>Honeycomb</Company>
