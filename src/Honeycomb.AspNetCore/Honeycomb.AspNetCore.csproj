@@ -4,7 +4,6 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <PackageId>Honeycomb.AspNetCore</PackageId>
     <VersionPrefix>1.1.1</VersionPrefix>
-    <VersionSuffix>local</VersionSuffix>
     <Authors>Hoenycomb</Authors>
     <Company>Honeycomb</Company>
     <Title>Client package for Honeycomb.io</Title>
