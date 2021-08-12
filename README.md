@@ -1,4 +1,7 @@
-# libhoney-dotnet [![CircleCI](https://circleci.com/gh/honeycombio/libhoney-dotnet.svg?style=shield)](https://circleci.com/gh/honeycombio/libhoney-dotnet)
+# libhoney-dotnet
+
+[![OSS Lifecycle](https://img.shields.io/osslifecycle/honeycombio/libhoney-dotnet)](https://github.com/honeycombio/home/blob/main/honeycomb-oss-lifecycle-and-practices.md)
+[![CircleCI](https://circleci.com/gh/honeycombio/libhoney-dotnet.svg?style=shield)](https://circleci.com/gh/honeycombio/libhoney-dotnet)
 
 This package makes it easy to instrument your .NET app to send useful events to Honeycomb, a service for debugging your software in production.
 
