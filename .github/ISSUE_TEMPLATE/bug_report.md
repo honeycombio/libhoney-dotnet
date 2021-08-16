@@ -17,7 +17,7 @@ Please see our [OSS process document](https://github.com/honeycombio/home/blob/m
 
 **Versions**
 
-- Dotnet:
+- .NET Runtime & version (eg .NET Core, .NET Framework):
 - Libhoney:
 
 **Steps to reproduce**
