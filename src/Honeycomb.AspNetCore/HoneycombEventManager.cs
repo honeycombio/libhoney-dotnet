@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Honeycomb.Models;
 using Microsoft.AspNetCore.Http;
 
@@ -34,7 +35,7 @@ namespace Honeycomb.AspNetCore
                 return;
 
             var ev = existingData as HoneycombEvent;
-            ev.Data.TryAdd(key, data);
+            ev.Data.Add(key, data);
         }
     }
 }
