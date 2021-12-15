@@ -20,9 +20,9 @@
 
 ### Dependencies
 
-5bff97fc Bump Shouldly from 3.0.2 to 4.0.3 (#44)
-c6c25ab6 Bump xunit.runner.visualstudio from 2.4.0 to 2.4.3 (#45)
-c21d71ce Bump xunit from 2.4.0 to 2.4.1 (#43)
+- Bump Shouldly from 3.0.2 to 4.0.3 (#44)
+- Bump xunit.runner.visualstudio from 2.4.0 to 2.4.3 (#45)
+- Bump xunit from 2.4.0 to 2.4.1 (#43)
 
 ## v1.1.1
 
