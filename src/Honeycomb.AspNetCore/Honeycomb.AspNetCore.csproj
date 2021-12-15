@@ -17,6 +17,8 @@
     <PackageReleaseNotes>https://github.com/honeycombio/libhoney-dotnet/releases</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/honeycombio/libhoney-dotnet.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>
