@@ -42,7 +42,7 @@ jobs:
       - run: mkdir -p build
       - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release --output build
+          command: dotnet.exe pack --configuration release --output build --no-restore -p:signed=true
       - persist_to_workspace:
           root: \
           paths:
