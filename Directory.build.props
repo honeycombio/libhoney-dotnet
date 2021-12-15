@@ -1,0 +1,12 @@
+<Project>
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(SIGNED)' == 'true' ">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Honeycomb.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+</Project>

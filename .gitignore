@@ -15,3 +15,4 @@ tools/
 !tools/packages.config
 
 appsettings.Development.json
+Honeycomb.snk

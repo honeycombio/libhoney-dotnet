@@ -41,8 +41,16 @@ jobs:
       - setup
       - run: mkdir -p build
       - run:
+          name: "Import GPG cert"
+          command: echo $GPG_BASE64 | base64 --decode | gpg.exe --batch --no-tty --import --yes
+          shell: bash.exe
+      - run:
+          name: "Decrypt SNK file"
+          command: gpg.exe -d --pinentry-mode loopback --passphrase $GPG_PASSPHRASE -o Honeycomb.snk Honeycomb.snk.gpg
+          shell: bash.exe
+      - run:
           name: "Build release package"
-          command: dotnet.exe pack --configuration release --output build
+          command: dotnet.exe pack --configuration release --output build --no-restore -p:signed=true
       - persist_to_workspace:
           root: \
           paths:
@@ -83,13 +91,20 @@ workflows:
   build:
     jobs:
       - test:
-          filters: &always_filter
+          filters:
             tags:
               only: /.*/
       - package:
+          context: Honeycomb Secrets for Public Repos
           requires:
             - test
-          filters: *always_filter
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore:
+                - /pull\/.*/
+                - /dependabot\/.*/
       - publish_github:
           context: Honeycomb Secrets for Public Repos
           requires:

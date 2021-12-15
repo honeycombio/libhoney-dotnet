@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Honeycomb.AspNetCore</PackageId>
     <VersionPrefix>1.1.1</VersionPrefix>
-    <Authors>Hoenycomb</Authors>
+    <Authors>Honeycomb</Authors>
     <Company>Honeycomb</Company>
     <Title>Client package for Honeycomb.io</Title>
     <Description>Client package for Honeycomb.io</Description>
@@ -17,6 +17,8 @@
     <PackageReleaseNotes>https://github.com/honeycombio/libhoney-dotnet/releases</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/honeycombio/libhoney-dotnet.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>

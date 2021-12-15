@@ -15,7 +15,7 @@ namespace Honeycomb.AspNetCore.Middleware
         private readonly ILogger<HoneycombMiddleware> _logger;
         private readonly IHoneycombService _service;
         private readonly IOptions<HoneycombApiSettings> _settings;
-        public HoneycombMiddleware(RequestDelegate next, 
+        public HoneycombMiddleware(RequestDelegate next,
             IHoneycombService service,
             IOptions<HoneycombApiSettings> settings,
             ILogger<HoneycombMiddleware> logger)
@@ -30,7 +30,7 @@ namespace Honeycomb.AspNetCore.Middleware
         {
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            
+
             var ev = new HoneycombEvent
             {
                 DataSetName = _settings.Value.DefaultDataSet
@@ -48,17 +48,17 @@ namespace Honeycomb.AspNetCore.Middleware
             {
                 await _next.Invoke(context);
                 stopwatch.Stop();
-            	ev.Data.TryAdd("name", $"{context.GetRouteValue("controller")}#{context.GetRouteValue("action")}");
-                ev.Data.TryAdd("action", context.GetRouteValue("action"));
-                ev.Data.TryAdd("controller", context.GetRouteValue("controller"));
-            	ev.Data.TryAdd("response.content_length", context.Response.ContentLength);
-            	ev.Data.TryAdd("response.status_code", context.Response.StatusCode);
-            	ev.Data.TryAdd("duration_ms", stopwatch.ElapsedMilliseconds);
+                ev.Data.Add("name", $"{context.GetRouteValue("controller")}#{context.GetRouteValue("action")}");
+                ev.Data.Add("action", context.GetRouteValue("action"));
+                ev.Data.Add("controller", context.GetRouteValue("controller"));
+                ev.Data.Add("response.content_length", context.Response.ContentLength);
+                ev.Data.Add("response.status_code", context.Response.StatusCode);
+                ev.Data.Add("duration_ms", stopwatch.ElapsedMilliseconds);
             }
             catch (Exception ex)
             {
-                ev.Data.TryAdd("request.error", ex.Source);
-                ev.Data.TryAdd("request.error_detail", ex.Message);
+                ev.Data.Add("request.error", ex.Source);
+                ev.Data.Add("request.error_detail", ex.Message);
                 throw;
             }
             finally
@@ -66,5 +66,5 @@ namespace Honeycomb.AspNetCore.Middleware
                 _service.QueueEvent(ev);
             }
         }
-}
+    }
 }

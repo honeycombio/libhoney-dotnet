@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Honeycomb.AspNetCore\Honeycomb.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\src\Honeycomb.AspNetCore\Honeycomb.AspNetCore.csproj" />
   </ItemGroup>
 
 </Project>
