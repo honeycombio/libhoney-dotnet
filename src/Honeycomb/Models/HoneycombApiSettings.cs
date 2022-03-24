@@ -4,6 +4,8 @@ namespace Honeycomb.Models
 {
     public class HoneycombApiSettings
     {
+        private string _dataset;
+
         /// <summary>
         /// The TeamId within Honeycomb.
         /// </summary>
@@ -25,7 +27,18 @@ namespace Honeycomb.Models
         /// The default dataset to apply to each event.
         /// </summary>
         /// <value></value>
-        public string DefaultDataSet { get; set; }
+        public string DefaultDataSet
+        {
+            get
+            {
+                if (!string.IsNullOrWhiteSpace(_dataset) || IsClassic)
+                {
+                    return _dataset;
+                }
+                return "unknown_service";
+            }
+            set { _dataset = value; }
+        }
 
         /// <summary>
         /// The default size of each push to the API.
@@ -43,5 +56,7 @@ namespace Honeycomb.Models
         /// The base URL to send event data to
         /// </summary>
         public string ApiHost { get; set; } = "https://api.honeycomb.io";
+
+        internal bool IsClassic => string.IsNullOrWhiteSpace(WriteKey) || WriteKey.Length == 32;
     }
 }
