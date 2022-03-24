@@ -58,6 +58,6 @@ namespace Honeycomb.Models
         /// </summary>
         public string ApiHost { get; set; } = "https://api.honeycomb.io";
 
-        internal bool IsClassic => string.IsNullOrWhiteSpace(WriteKey) || WriteKey.Length == 32;
+        private bool IsClassic => string.IsNullOrWhiteSpace(WriteKey) || WriteKey.Length == 32;
     }
 }
