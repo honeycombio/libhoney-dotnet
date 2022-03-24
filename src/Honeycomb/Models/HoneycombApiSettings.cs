@@ -31,11 +31,12 @@ namespace Honeycomb.Models
         {
             get
             {
-                if (!string.IsNullOrWhiteSpace(_dataset) || IsClassic)
-                {
+                if (IsClassic) {
                     return _dataset;
                 }
-                return "unknown_service";
+                return string.IsNullOrWhiteSpace(_dataset) ?
+                    "unknown_service" :
+                    _dataset.Trim();
             }
             set { _dataset = value; }
         }
