@@ -1,10 +1,23 @@
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace Honeycomb.Models
 {
     public class HoneycombApiSettings
     {
+        private const string DefaultDatasetValue = "unknown_dataset";
+
+        private readonly ILogger<HoneycombApiSettings> _logger;
         private string _dataset;
+
+        public HoneycombApiSettings()
+            : this(LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<HoneycombApiSettings>())
+        { }
+
+        public HoneycombApiSettings(ILogger<HoneycombApiSettings> logger)
+        {
+            _logger = logger ?? LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<HoneycombApiSettings>();
+        }
 
         /// <summary>
         /// The TeamId within Honeycomb.
@@ -34,9 +47,17 @@ namespace Honeycomb.Models
                 if (IsClassic) {
                     return _dataset;
                 }
-                return string.IsNullOrWhiteSpace(_dataset) ?
-                    "unknown_service" :
-                    _dataset.Trim();
+                if (string.IsNullOrWhiteSpace(_dataset))
+                {
+                    _logger.LogWarning($"WARN: Dataset is empty or only whitespace, using default: '{DefaultDatasetValue}'");
+                    return DefaultDatasetValue;
+                }
+                var trimmed = _dataset.Trim();
+                if (_dataset != trimmed)
+                {
+                    _logger.LogWarning($"WARN: Dataset has unexpected whitespace, using trimmed version: '{trimmed}'");
+                }
+                return trimmed;
             }
             set { _dataset = value; }
         }

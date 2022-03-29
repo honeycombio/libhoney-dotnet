@@ -1,4 +1,3 @@
-using System;
 using Xunit;
 using Shouldly;
 
@@ -17,8 +16,8 @@ namespace Honeycomb.Models
         [InlineData("c1a551c000d68f9ed1e96432ac1a3380", "", "")]
         [InlineData("c1a551c000d68f9ed1e96432ac1a3380", "my-service", "my-service")]
         [InlineData("c1a551c000d68f9ed1e96432ac1a3380", " my-service ", " my-service ")]
-        // defaults to unknown_service and trims dataset if set
-        [InlineData("d68f9ed1e96432ac1a3380", "", "unknown_service")]
+        // defaults to unknown_dataset and trims dataset if set
+        [InlineData("d68f9ed1e96432ac1a3380", "", "unknown_dataset")]
         [InlineData("d68f9ed1e96432ac1a3380", "my-service", "my-service")]
         [InlineData("d68f9ed1e96432ac1a3380", " my-service ", "my-service")]
         public void Dataset(string writekey, string dataset, string expected)
