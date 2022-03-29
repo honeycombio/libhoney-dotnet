@@ -16,7 +16,7 @@ namespace Honeycomb.Models
 
         public HoneycombApiSettings(ILogger<HoneycombApiSettings> logger)
         {
-            _logger = logger ?? LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<HoneycombApiSettings>();
+            _logger = logger;
         }
 
         /// <summary>
