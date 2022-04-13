@@ -1,6 +1,6 @@
 # libhonet-dotnet Changelog
 
-## v.1.3.0
+## v.1.3.0 2022-04-12
 
 ### Improvements
 
@@ -25,7 +25,7 @@
 
 ## v1.2.0
 
-### Inprovements
+### Improvements
 
 - Fix authors, move examples and target netstandard2.0 (#48)
 
