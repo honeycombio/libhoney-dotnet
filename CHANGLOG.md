@@ -1,8 +1,31 @@
 # libhonet-dotnet Changelog
 
+## v.1.3.0 2022-04-12
+
+### Improvements
+
+- Add Environment and Services support (#60) | [@MikeGoldsmith](https://github.com/MikeGoldsmith)
+
+### Maintenance
+
+- Add re-triage workflow (#50)| [@vreynolds](https://github.com/vreynolds)
+
+### Dependencies
+
+- Bump Microsoft.Extensions.Hosting from 6.0.0 to 6.0.1 (#62)
+- Bump Moq from 4.16.1 to 4.17.2 (#61)
+- Bump Microsoft.AspNetCore.Routing from 2.1 to 2.2.2 (#55)
+- Bump Microsoft.NET.Test.Sdk from 15.9.0 to 17.1.0 (#58)
+- Bump Newtonsoft.Json from 9.0.1 to 13.0.1 (#57)
+- Bump Microsoft.Extensions.Http from 2.1 to 6.0.0 (#51)
+- Bump Microsoft.AspNetCore.Http from 2.1 to 2.2.2 (#53)
+- Bump Moq from 4.10.1 to 4.16.1 (#54)
+- Bump Microsoft.Extensions.Logging from 2.1 to 6.0.0 (#46)
+- Bump Microsoft.Extensions.Hosting from 2.1 to 6.0.0 (#47)
+
 ## v1.2.0
 
-### Inmprovements
+### Improvements
 
 - Fix authors, move examples and target netstandard2.0 (#48)
 
@@ -26,11 +49,11 @@
 
 ## v1.1.1
 
-### Improvements:
+### Improvements
 
 - Add WriteKey and deprecate TeamId (#30)
 
-### Fixes:
+### Fixes
 
 - Update AddHoneycomb with settings instance to use Action<> (#29)
 - Fix typo in VersionSuffux project file property (#31)
@@ -39,7 +62,7 @@
 
 ## v1.1.0
 
-### Improvements:
+### Improvements
 
 - Change the ApiHost setting to include the url scheme (#21)
 - Add support for setting the api send target through configuration (#20)
