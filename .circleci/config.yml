@@ -34,7 +34,9 @@ jobs:
       - run:
           name: "Run tests"
           command: dotnet.exe test -v n
-      - run: dotnet build examples/Sample/Sample.csproj
+      - run:
+          name: Build example app
+          command: dotnet build examples/Sample/Sample.csproj
 
   package:
     executor:
