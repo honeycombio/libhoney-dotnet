@@ -5,7 +5,7 @@
 
 This package makes it easy to instrument your .NET app to send useful events to Honeycomb, a service for debugging your software in production.
 
-- [Sample](/Sample/)
+- [Sample](/examples/Sample/)
 
 ## Requirements
 
