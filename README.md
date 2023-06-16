@@ -7,25 +7,14 @@ This package makes it easy to instrument your .NET app to send useful events to 
 
 - [Sample](/examples/Sample/)
 
-## Requirements
+## Contributions
 
-The library targets [.NET Standard 2.0](https://dotnet.microsoft.com/platform/dotnet-standard).
+See [DEVELOPMENT.md](./DEVELOPMENT.md)
 
-To build and test the project locally, you'll need .NET SDK 5.0+.
+Features, bug fixes and other changes to libhoney are gladly accepted. Please
+open issues or a pull request with your change.
 
-## Building & Testing
-
-To build all the projects, run the following:
-
-`dotnet build`
-
-To run tests, run:
-
-`dotnet test`
-
-To create the nuget packages, run:
-
-`dotnet pack`
+All contributions will be released under the Apache License 2.0.
 
 ## ASP.NET Core
 
