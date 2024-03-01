@@ -48,7 +48,7 @@ namespace Honeycomb.Models
         {
             get
             {
-                if (IsClassic) {
+                if (IsClassic()) {
                     return _dataset;
                 }
                 if (string.IsNullOrWhiteSpace(_dataset))
@@ -83,7 +83,7 @@ namespace Honeycomb.Models
         /// </summary>
         public string ApiHost { get; set; } = "https://api.honeycomb.io";
 
-        /*private bool IsClassic() {
+        public bool IsClassic() {
             if (WriteKey == null || WriteKey.Length == 0) {
                 return true;
             } 
@@ -96,7 +96,6 @@ namespace Honeycomb.Models
              return Regex.Match(WriteKey, IngestClassicKeyRegex).Success;
             }
             return false;
-        }*/
-        private bool IsClassic => string.IsNullOrWhiteSpace(WriteKey) || WriteKey.Length == 32;
+        }
     }
 }
