@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 
 namespace Honeycomb.Models
@@ -9,6 +10,9 @@ namespace Honeycomb.Models
 
         private readonly ILogger<HoneycombApiSettings> _logger;
         private string _dataset;
+        private const string ClassicKeyRegex = "^[a-f0-9]*$";
+        private const string IngestClassicKeyRegex = "^hc[a-z]ic_[a-z0-9]*$";
+
 
         public HoneycombApiSettings()
             : this(LoggerFactory.Create(builder => builder.AddConsole()).CreateLogger<HoneycombApiSettings>())
@@ -79,6 +83,20 @@ namespace Honeycomb.Models
         /// </summary>
         public string ApiHost { get; set; } = "https://api.honeycomb.io";
 
+        /*private bool IsClassic() {
+            if (WriteKey == null || WriteKey.Length == 0) {
+                return true;
+            } 
+            else if (WriteKey.Length == 32) 
+            {
+                return Regex.Match(WriteKey, ClassicKeyRegex).Success;
+            }
+            else if (WriteKey.Length == 64)
+            {
+             return Regex.Match(WriteKey, IngestClassicKeyRegex).Success;
+            }
+            return false;
+        }*/
         private bool IsClassic => string.IsNullOrWhiteSpace(WriteKey) || WriteKey.Length == 32;
     }
 }
