@@ -85,15 +85,15 @@ namespace Honeycomb.Models
 
         public bool IsClassic() {
             if (WriteKey == null || WriteKey.Length == 0) {
-                return true;
+              return true;
             } 
             else if (WriteKey.Length == 32) 
             {
-                return Regex.Match(WriteKey, ClassicKeyRegex).Success;
+              return Regex.Match(WriteKey, ClassicKeyRegex).Success;
             }
             else if (WriteKey.Length == 64)
             {
-             return Regex.Match(WriteKey, IngestClassicKeyRegex).Success;
+              return Regex.Match(WriteKey, IngestClassicKeyRegex).Success;
             }
             return false;
         }
