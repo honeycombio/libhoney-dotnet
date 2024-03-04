@@ -35,5 +35,13 @@ namespace Honeycomb.Models
             };
             settings.DefaultDataSet.ShouldBe(expected);
         }
+
+        public void IsClassic()
+        {
+            var settings = new HoneycombApiSettings();
+            settings.IsClassic().ShouldBeFalse();
+            settings.WriteKey = "";
+            settings.IsClassic().ShouldBeFalse();
+        }
    }
 }

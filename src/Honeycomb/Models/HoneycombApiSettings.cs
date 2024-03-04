@@ -83,12 +83,12 @@ namespace Honeycomb.Models
         /// </summary>
         public string ApiHost { get; set; } = "https://api.honeycomb.io";
 
-        public bool IsClassic() {
-            if (WriteKey == null || WriteKey.Length == 0) 
+        internal bool IsClassic() {
+            if (WriteKey == null || WriteKey.Length == 0)
             {
               return true;
-            } 
-            else if (WriteKey.Length == 32) 
+            }
+            else if (WriteKey.Length == 32)
             {
               return Regex.Match(WriteKey, ClassicKeyRegex).Success;
             }
