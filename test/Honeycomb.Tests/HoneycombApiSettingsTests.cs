@@ -36,12 +36,22 @@ namespace Honeycomb.Models
             settings.DefaultDataSet.ShouldBe(expected);
         }
 
-        public void IsClassic()
+
+        [Theory]
+        [InlineData("", true)]
+        [InlineData("12345678901234567890123456789012", true)]
+        [InlineData("hcaic_1234567890123456789012345678901234567890123456789012345678", true)]
+        [InlineData("kgvSpPwegJshQkuowXReLD", false)]
+        [InlineData("hcaic_12345678901234567890123456", false)]
+        [InlineData("hcxik_01hqk4k20cjeh63wca8vva5stw70nft6m5n8wr8f5mjx3762s8269j50wc", false)]
+        public void IsClassic(string key, bool expected)
         {
-            var settings = new HoneycombApiSettings();
-            settings.IsClassic().ShouldBeFalse();
-            settings.WriteKey = "";
-            settings.IsClassic().ShouldBeFalse();
+            var settings = new HoneycombApiSettings
+            {
+                WriteKey = key,
+                DefaultDataSet = "my-dataset"
+            };
+            settings.IsClassic().ShouldBe(expected);
         }
    }
 }
