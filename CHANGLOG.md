@@ -1,4 +1,4 @@
-# libhonet-dotnet Changelog
+# libhoney-dotnet Changelog
 
 ## v1.4.9 2024-03-04
 
