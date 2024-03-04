@@ -84,7 +84,7 @@ namespace Honeycomb.Models
         public string ApiHost { get; set; } = "https://api.honeycomb.io";
 
         internal bool IsClassic() {
-            if (WriteKey == null || WriteKey.Length == 0)
+            if (String.IsNullOrEmpty(WriteKey))
             {
               return true;
             }
