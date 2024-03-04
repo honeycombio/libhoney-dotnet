@@ -29,4 +29,8 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
+  <ItemGroup Condition=" $(SIGNED) != 'true' ">
+    <InternalsVisibleTo Include="Honeycomb.Tests" />
+  </ItemGroup>
+
 </Project>
