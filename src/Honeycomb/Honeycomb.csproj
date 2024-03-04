@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackageId>Honeycomb</PackageId>
-    <VersionPrefix>1.3.0</VersionPrefix>
+    <VersionPrefix>1.4.0</VersionPrefix>
     <Authors>Honeycomb</Authors>
     <Company>Honeycomb</Company>
     <Title>Client package for Honeycomb.io</Title>

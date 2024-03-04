@@ -1,5 +1,36 @@
 # libhonet-dotnet Changelog
 
+## v1.4.9 2024-03-04
+
+- feat: support classic ingest keys (#96) | @brookesargent
+
+### Fixes
+
+- fix sample link in README.md (#75) | @adamchester-lmg
+
+### Maintenance
+
+- chore: update dependabot title to semantic commit format (#85) | @pkanal
+- ci: update validate PR title workflow (#79) | @pkanal
+- ci: validate PR title (#78) | @pkanal
+- docs: add development.md (#89) | @vreynolds
+- maint: update codeowners to pipeline-team (#95) | @JamieDanielson
+- maint: update codeowners to pipeline (#94) | @JamieDanielson
+- maint: update gpg signing key (#90) | @vreynolds
+- maint: delete workflows for old board (#77) | @vreynolds
+- maint: add release file (#76) | @vreynolds
+- maint: add new project workflow (#74) | @vreynolds
+- maint(deps): bump Microsoft.NET.Test.Sdk from 17.3.2 to 17.5.0 (#88)
+- Bump Newtonsoft.Json from 13.0.1 to 13.0.2 (#83)
+- Bump Microsoft.NET.Test.Sdk from 17.2.0 to 17.3.2 (#73)
+- Bump Shouldly from 4.0.3 to 4.1.0 (#69)
+- Bump Moq from 4.18.1 to 4.18.2 (#71)
+- xunit from 2.4.1 to 2.4.2 (#72)
+- Bump xunit.runner.visualstudio from 2.4.3 to 2.4.5 (#66)
+- Bump Microsoft.NET.Test.Sdk from 17.1.0 to 17.2.0 (#67)
+- Bump Moq from 4.17.2 to 4.18.1 (#68)
+- Build example as part of CI test phase (#65)
+
 ## v.1.3.0 2022-04-12
 
 ### Improvements
